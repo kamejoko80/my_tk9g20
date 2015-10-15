@@ -1,0 +1,57 @@
+#summary One-sentence summary of this page.
+
+= Resource =
+
+1> U-boot version:
+  
+   U-Boot 2009.11.1 (May 15 2010 - 17:07:37)
+
+2> Kernel Version:
+
+   linux-2.6.30.tar.bz2
+
+   linux-2.6.30-km9260-pk9g20-17052011.patch.gz
+
+   Or
+
+   linux-2.6.33.tar.bz2
+   
+   linux-2.6.33-pk9g20-01042011.diff
+
+= Getting Start =
+
+= Install kernel uImage (<4MB) to Nand Flash script (u-boot) =
+{{{
+  U-boot> setenv install_kernel 'nand erase 0x0 0x400000; tftp 0x20000000 uImage; nand write 0x20000000 0x0 0x400000'   
+}}}
+
+
+
+   Rename : 
+
+   Angstrom-x11-at91sam9-image-glibc-ipk-2009.X-stable-at91sam9263ek.rootfs.jffs2
+
+   To:
+
+   linux4sam-angstrom-at91sam9263ek.rootfs.jffs2
+   
+
+= Install rootfs to Nand Flash script (u-boot) =
+
+{{{
+   U-boot> setenv rootfs linux4sam-angstrom-at91sam9263ek.rootfs.jffs2
+   U-boot> setenv install_rootfs 'nand erase 0x400000 0x1d40000; tftp 0x20000000 ${rootfs}; nand write.jffs2 0x20000000 0x400000 0x1d40000'     
+}}}
+
+= Environment variable (u-boot) =
+
+{{{
+   U-boot> setenv bootcmd 'nand read.e 0x22000000 0x0 0x400000; bootm 0x22000000' 
+   U-boot> setenv bootargs 'root=/dev/mtdblock1 rw rootfstype=jffs2'
+}}}
+
+
+  
+       
+
+      
